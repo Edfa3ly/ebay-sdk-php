@@ -47,6 +47,11 @@ class ShoppingBaseService extends \DTS\eBaySDK\Services\BaseService
     const HDR_TRACKING_PARTNER_CODE = 'X-EBAY-API-TRACKING-PARTNER-CODE';
 
     /**
+     * HTTP header constant. The OAUTH Authentication Token that is used to validate the caller has permission to access the eBay servers.
+     */
+    const HDR_AUTHORIZATION = 'X-EBAY-API-IAF-TOKEN';
+
+    /**
      * @param array $config Configuration option values.
      */
     public function __construct(array $config)
@@ -100,6 +105,7 @@ class ShoppingBaseService extends \DTS\eBaySDK\Services\BaseService
         $headers[self::HDR_APP_ID] = $this->getConfig('credentials')->getAppId();
         $headers[self::HDR_OPERATION_NAME] = $operationName;
         $headers[self::HDR_REQUEST_FORMAT] = 'XML';
+        $headers[self::HDR_AUTHORIZATION] = $this->getConfig('authorization');
 
         // Add optional headers.
         // Take into account siteId is an integer that can be set to zero.
